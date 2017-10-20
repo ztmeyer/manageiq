@@ -169,10 +169,12 @@ class TimeProfile < ApplicationRecord
   def self.for_user(user_id)
     where("profile_type = ? or (profile_type = ? and profile_key = ?)", "global", "user", user_id)
   end
+  private_class_method :for_user
 
   def self.ordered_by_desc
     order("lower(description) ASC")
   end
+  private_class_method :ordered_by_desc
 
   def self.profiles_for_user(user_id, region_id)
     in_region(region_id)
@@ -180,10 +182,12 @@ class TimeProfile < ApplicationRecord
       .rollup_daily_metrics
       .ordered_by_desc
   end
+  private_class_method :profiles_for_user
 
   def self.profile_for_user_tz(user_id, user_tz)
     TimeProfile.rollup_daily_metrics.detect { |tp| tp.match_user_tz?(user_id, user_tz) }
   end
+  private_class_method :profile_for_user_tz
 
   # @param tz [nil|TimeProfile|TimeZone] (default timezone "UTC")
   # @return [TimeProfile] time profile that uses this time zone
@@ -192,4 +196,5 @@ class TimeProfile < ApplicationRecord
     tz ||= DEFAULT_TZ
     rollup_daily_metrics.find_all_with_entire_tz.detect { |tp| tp.tz_or_default == tz }
   end
+  private_class_method :default_time_profile
 end

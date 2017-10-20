@@ -466,6 +466,7 @@ class Classification < ApplicationRecord
       ent ? ent.update_attributes(entry) : cat.add_entry(entry)
     end
   end
+  private_class_method :add_entries_from_hash
 
   def validate_uniqueness_on_tag_name
     tag = find_tag
@@ -492,6 +493,7 @@ class Classification < ApplicationRecord
       File.join(ns, c.name, name) if c
     end
   end
+  private_class_method :name2tag
 
   def tag2name(tag)
     File.split(tag).last unless tag.nil?
@@ -511,6 +513,7 @@ class Classification < ApplicationRecord
 
     "#{cname}: #{ename}"
   end
+  private_class_method :tag2human
 
   def find_tag
     Tag.find_by_classification_name(name, region_id, ns, parent_id)

@@ -69,5 +69,6 @@ module MiqApache
         $log.warn("MIQ(MiqApache::Control.run_apache_cmd) Apache command #{command} with result: #{res} failed with error: #{err}") if $log
       end
     end
+    private_class_method :run_apache_cmd
   end
 end

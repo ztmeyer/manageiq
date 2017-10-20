@@ -27,6 +27,7 @@ module ManageIQ
       def self.ems_type
         @ems_type ||= parent.ems_type.to_sym
       end
+      private_class_method :ems_type
 
       def group_targets_by_ems(targets)
         non_ems_targets = targets.select { |t| !t.kind_of?(ExtManagementSystem) && t.respond_to?(:ext_management_system) }

@@ -260,4 +260,5 @@ class LogFile < ApplicationRecord
     _log.info("#{log_header} #{msg}")
     task.update_status("Queued", "Ok", msg)
   end
+  private_class_method :_request_logs
 end

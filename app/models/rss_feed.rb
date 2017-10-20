@@ -94,6 +94,7 @@ class RssFeed < ApplicationRecord
     end
     result
   end
+  private_class_method :eval_item_attr
 
   def find_items
     item_class = options[:item_class].constantize
@@ -145,10 +146,12 @@ class RssFeed < ApplicationRecord
 
     rec.tag_add(yml[:roles], :ns => "/managed", :cat => "roles") unless yml[:roles].nil?
   end
+  private_class_method :sync_from_yml_file
 
   def self.yml_file_name(name)
     File.join(YML_DIR, name + ".yml")
   end
+  private_class_method :yml_file_name
 
   def self.sync_from_yml_dir
     # Add missing feeds to model
@@ -163,8 +166,10 @@ class RssFeed < ApplicationRecord
   rescue => err
     _log.log_backtrace(err)
   end
+  private_class_method :sync_from_yml_dir
 
   def self.seed
     sync_from_yml_dir
   end
+  private_class_method :seed
 end

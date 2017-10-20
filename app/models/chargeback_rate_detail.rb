@@ -257,4 +257,5 @@ class ChargebackRateDetail < ApplicationRecord
 
     rate_details.sort_by { |rd| [rd[:group], rd[:description]] }
   end
+  private_class_method :default_rate_details_for
 end

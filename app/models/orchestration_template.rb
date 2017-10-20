@@ -191,6 +191,7 @@ class OrchestrationTemplate < ApplicationRecord
   def self.calc_md5(text)
     Digest::MD5.hexdigest(text) if text
   end
+  private_class_method :calc_md5
 
   def calc_md5(text)
     self.class.calc_md5(text)
@@ -200,6 +201,7 @@ class OrchestrationTemplate < ApplicationRecord
     # ensure universal new lines and content ending with a new line
     text.encode(:universal_newline => true).chomp.concat("\n")
   end
+  private_class_method :with_universal_newline
 
   def with_universal_newline(text)
     self.class.with_universal_newline(text)
